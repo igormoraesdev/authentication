@@ -3,8 +3,19 @@ import Credentials from 'next-auth/providers/credentials';
 import { authService } from './lib/service';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  cookies: {
+    sessionToken: {
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+        domain:
+          process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_DOMAIN : 'localhost',
+      },
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
-  trustHost: true,
   providers: [
     Credentials({
       credentials: {

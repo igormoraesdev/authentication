@@ -1,9 +1,8 @@
 import { withAuth } from '@/lib/auth';
 import { logger } from '@/lib/logger';
-import { User } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const GET = withAuth(async (_req: NextRequest, user: User | unknown) => {
+export const GET = withAuth(async (_req: NextRequest, user: CustomUser | unknown) => {
   try {
     return NextResponse.json(user);
   } catch (error) {
