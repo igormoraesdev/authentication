@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { ErrorButton } from '../ErrorButton';
+import { RecentActivites } from '../RecentActivites';
 import { SignoutButton } from '../SignoutButton';
 
 export default async function Dashboard({ user }: { user: CustomUser }) {
@@ -85,7 +86,7 @@ export default async function Dashboard({ user }: { user: CustomUser }) {
             </p>
           </div>
         </div>
-        {/* <RecentActivites /> */}
+        <RecentActivites />
       </div>
     </div>
   );

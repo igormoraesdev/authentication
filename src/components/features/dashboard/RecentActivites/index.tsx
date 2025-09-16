@@ -8,8 +8,8 @@ export const RecentActivites = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchRecentActivites = async () => {
-    const response: Activites[] = (await userService.getRecentActivities()) || [];
-    setActivites(response);
+    const response = await userService.getRecentActivities();
+    setActivites(response || []);
     setLoading(false);
   };
 

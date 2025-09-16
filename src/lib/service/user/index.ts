@@ -5,14 +5,13 @@ export class UserService {
 
   async getProfile(config?: { headers?: HeadersInit }): Promise<CustomUser | undefined> {
     try {
-      const res = await fetch(`${this.baseEndpoint}/user-profile`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user-profile`, {
         method: 'GET',
         headers: {
           ...config?.headers,
         },
         cache: 'no-store',
       });
-      console.log('Res', res);
 
       if (!res.ok) {
         logger.log('Error getting user profile', res.statusText);
@@ -28,7 +27,7 @@ export class UserService {
   }
   async getRecentActivities(config?: { headers?: HeadersInit }): Promise<Activites[] | undefined> {
     try {
-      const res = await fetch(`${this.baseEndpoint}/recent-activities`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/recent-activities`, {
         method: 'GET',
         headers: {
           ...config?.headers,
