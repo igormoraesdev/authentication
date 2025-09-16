@@ -1,11 +1,14 @@
 import { format } from 'date-fns';
+import { RecentActivites } from '../RecentActivites';
+import { SignoutButton } from '../SignoutButton';
 
 export default async function Dashboard({ user }: { user: CustomUser }) {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       <div className="bg-white/5 backdrop-blur-sm border-b border-white/10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex justify-between items center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+          <SignoutButton />
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -79,6 +82,7 @@ export default async function Dashboard({ user }: { user: CustomUser }) {
             </p>
           </div>
         </div>
+        <RecentActivites />
       </div>
     </div>
   );

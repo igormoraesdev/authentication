@@ -38,7 +38,7 @@ export default function Signin() {
           height={100}
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
-          Sign in to your account
+          Faça o login
         </h2>
       </div>
 
@@ -46,7 +46,7 @@ export default function Signin() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-100">
-              Email address
+              Email
             </label>
             <div className="mt-2">
               <input
@@ -87,7 +87,7 @@ export default function Signin() {
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign in
+              Entrar
             </button>
           </div>
         </form>
