@@ -1,8 +1,6 @@
 import { logger } from '@/lib/logger';
 
 export class UserService {
-  private readonly baseEndpoint = '/api';
-
   async getProfile(config?: { headers?: HeadersInit }): Promise<CustomUser | undefined> {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user-profile`, {
