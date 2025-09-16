@@ -35,7 +35,7 @@ Crie um arquivo `.env.local` na raiz do projeto:
 NEXTAUTH_SECRET=
 NEXTAUTH_URL=
 AUTH_SECRET=
-AUTH_URL=
+NEXT_PUBLIC_BASE_URL=
 
 ```
 
