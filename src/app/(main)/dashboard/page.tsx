@@ -1,3 +1,5 @@
+export const runtime = 'nodejs';
+
 import { Dashboard } from '@/components/features';
 import { userService } from '@/lib/service';
 import { cookies } from 'next/headers';
