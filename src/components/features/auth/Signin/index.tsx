@@ -1,5 +1,6 @@
 'use client';
 
+import { logger } from '@/lib/logger';
 import { authService } from '@/lib/service';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
@@ -22,8 +23,8 @@ export default function Signin() {
           callbackUrl: '/dashboard',
         });
       }
-    } catch (err) {
-      console.log('error', err);
+    } catch {
+      throw logger.frontend('Error Authenticating');
     }
   };
 

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { ErrorButton } from '../ErrorButton';
 import { RecentActivites } from '../RecentActivites';
 import { SignoutButton } from '../SignoutButton';
 
@@ -27,6 +28,9 @@ export default async function Dashboard({ user }: { user: CustomUser }) {
                 <p className="text-gray-300 text-lg">Tenha um ótimo dia de trabalho</p>
               </div>
             </div>
+          </div>
+          <div className="mt-4 flex items-center space-x-4">
+            <ErrorButton />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
@@ -78,7 +82,7 @@ export default async function Dashboard({ user }: { user: CustomUser }) {
               <h3 className="text-lg font-semibold text-white">Membro desde</h3>
             </div>
             <p className="text-sm text-gray-300">
-              {format(user?.memberSince as string, 'dd-MM-yyyy')}
+              {user?.memberSince ? format(user?.memberSince as string, 'dd-MM-yyyy') : 'N/A'}
             </p>
           </div>
         </div>

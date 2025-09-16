@@ -1,4 +1,5 @@
 import { jwtService } from '@/lib/jwt/jwt';
+import { logger } from '@/lib/logger';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -12,14 +13,14 @@ export function withAuth(handler: RouteHandler) {
       const token = await getToken({ req, secret });
 
       if (!token) {
+        logger.server('withAuth: Unauthorized');
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
       const user = await jwtService.decode<CustomUser>(token.accessToken);
 
       return handler(req, user);
-    } catch (err) {
-      console.error(err);
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    } catch {
+      logger.server('withAuth: Error');
     }
   };
 }

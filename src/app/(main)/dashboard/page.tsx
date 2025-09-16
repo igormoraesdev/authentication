@@ -11,5 +11,5 @@ export default async function DashboardPage() {
     },
   });
 
-  return <Dashboard user={user} />;
+  return <Dashboard user={user as CustomUser} />;
 }
