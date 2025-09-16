@@ -1,28 +1,52 @@
-import { httpClient } from '@/lib/api';
 import { logger } from '@/lib/logger';
 
 export class UserService {
-  private readonly client = httpClient;
   private readonly baseEndpoint = '/api';
 
-  async getProfile(config?: {
-    headers: { cookie: string; cache: string };
-  }): Promise<CustomUser | undefined> {
+  async getProfile(config?: { headers?: HeadersInit }): Promise<CustomUser | undefined> {
     try {
-      const response = await this.client.get<CustomUser>(`${this.baseEndpoint}/user-profile`, {
-        headers: config?.headers,
+      const res = await fetch(`${this.baseEndpoint}/user-profile`, {
+        method: 'GET',
+        headers: {
+          ...config?.headers,
+        },
+        cache: 'no-store',
       });
-      return response.data;
+      console.log('Res', res);
+
+      if (!res.ok) {
+        logger.log('Error getting user profile', res.statusText);
+        return undefined;
+      }
+
+      const data: CustomUser = await res.json();
+      return data;
     } catch (error) {
       logger.log('Error getting user profile', error);
+      return undefined;
     }
   }
-  async getRecentActivites(): Promise<Activites[] | undefined> {
+  async getRecentActivities(config?: { headers?: HeadersInit }): Promise<Activites[] | undefined> {
     try {
-      const response = await this.client.get<Activites[]>(`${this.baseEndpoint}/recent-activities`);
-      return response.data;
+      const res = await fetch(`${this.baseEndpoint}/recent-activities`, {
+        method: 'GET',
+        headers: {
+          ...config?.headers,
+        },
+        credentials: 'include',
+        cache: 'no-store',
+      });
+
+      if (!res.ok) {
+        logger.log('Error getting recent activities', res.statusText);
+        return undefined;
+      }
+
+      const data: Activites[] = await res.json();
+      return data;
     } catch (error) {
       logger.log('Error getting recent activities', error);
+      return undefined;
     }
   }
 }
