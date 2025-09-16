@@ -6,7 +6,7 @@ class Logger implements ILogger {
 
   constructor(private readonly _sentry: typeof Sentry) {}
 
-  log(message: string, error: Error | unknown) {
+  log(message: string, error?: Error | unknown) {
     this._sentry.captureMessage(message, {
       level: 'error',
       extra: {
