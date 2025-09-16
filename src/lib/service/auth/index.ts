@@ -12,7 +12,7 @@ export class AuthService {
       );
       return response.data;
     } catch (error) {
-      throw new Error('Credenciais inválidas', { cause: error });
+      throw new Error('Unauthorized.', { cause: error });
     }
   }
 }
