@@ -8,6 +8,10 @@ declare global {
     email: string;
     memberSince?: string;
   }
+  export interface Activites {
+    id: string;
+    action: string;
+  }
 
   export interface JwtPayload {
     readonly id: string;
@@ -33,7 +37,7 @@ declare global {
 declare module 'next-auth' {
   interface Session {
     user: User & CustomUser & AdapterUser & { token: string };
-    accessToken: string;
+    token: string;
   }
 
   interface User extends DefaultUser {

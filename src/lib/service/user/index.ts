@@ -14,6 +14,14 @@ export class UserService {
       throw new Error('Error getting user profile', { cause: error });
     }
   }
+  async getRecentActivites(): Promise<Activites[]> {
+    try {
+      const response = await this.client.get<Activites[]>(`${this.baseEndpoint}/recent-activities`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error getting user profile', { cause: error });
+    }
+  }
 }
 
 export const userService = new UserService();

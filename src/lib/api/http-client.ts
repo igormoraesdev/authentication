@@ -13,6 +13,7 @@ export class AxiosHttpClient implements IHttpClient {
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true,
     });
     this.setInterceptors();
   }
@@ -23,8 +24,8 @@ export class AxiosHttpClient implements IHttpClient {
         const isServer = typeof window === 'undefined';
         const session = isServer ? await auth() : await getSession();
 
-        if (session?.accessToken) {
-          config.headers.Authorization = `Bearer ${session.accessToken}`;
+        if (session?.user?.token) {
+          config.headers.Authorization = `Bearer ${session.user.token}`;
         }
 
         return config;
