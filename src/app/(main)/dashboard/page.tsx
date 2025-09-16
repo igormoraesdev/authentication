@@ -10,6 +10,5 @@ export default async function DashboardPage() {
       cache: 'no-store',
     },
   });
-
   return <Dashboard user={user as CustomUser} />;
 }

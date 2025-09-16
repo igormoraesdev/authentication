@@ -9,6 +9,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 export const GET = withAuth(async (req: NextRequest) => {
   try {
     const token = await getToken({ req, secret });
+
     if (!token) {
       logger.server('GET: User Profile: Unauthorized');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

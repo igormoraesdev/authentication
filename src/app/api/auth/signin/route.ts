@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     id: '1',
     name: 'John Doe',
     email,
-    memberSince: '2023-01-15',
+    memberSince: new Date().toISOString(),
   };
 
   const token = await jwtService.encode(user);

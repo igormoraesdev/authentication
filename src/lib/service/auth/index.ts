@@ -1,4 +1,5 @@
 import { httpClient } from '@/lib/api';
+import { logger } from '@/lib/logger';
 
 export class AuthService {
   private readonly client = httpClient;
@@ -11,8 +12,8 @@ export class AuthService {
         credentials,
       );
       return response.data;
-    } catch (error) {
-      throw new Error('Unauthorized.', { cause: error });
+    } catch {
+      throw logger.server('Unauthorized');
     }
   }
 }

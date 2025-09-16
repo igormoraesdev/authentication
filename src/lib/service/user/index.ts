@@ -14,7 +14,7 @@ export class UserService {
       });
       return response.data;
     } catch {
-      logger.server('Error getting user profile');
+      throw logger.server('Error getting user profile');
     }
   }
   async getRecentActivites(): Promise<Activites[] | undefined> {
@@ -22,7 +22,7 @@ export class UserService {
       const response = await this.client.get<Activites[]>(`${this.baseEndpoint}/recent-activities`);
       return response.data;
     } catch {
-      logger.frontend('Error getting recent activities');
+      throw logger.frontend('Error getting recent activities');
     }
   }
 }
