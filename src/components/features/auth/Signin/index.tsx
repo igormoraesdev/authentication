@@ -1,5 +1,6 @@
 'use client';
 
+import { authService } from '@/lib/service';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -12,13 +13,17 @@ export default function Signin() {
     e.preventDefault();
 
     try {
-      await signIn('credentials', {
-        email,
-        password,
-        redirectTo: '/dashboard',
-      });
+      const authResponse = await authService.login({ email, password });
+      if (authResponse.token) {
+        await signIn('credentials', {
+          email,
+          password,
+          redirect: true,
+          callbackUrl: '/dashboard',
+        });
+      }
     } catch (err) {
-      console.log(err);
+      console.log('error', err);
     }
   };
 

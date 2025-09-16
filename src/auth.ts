@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import { authService } from './lib/service';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -9,17 +10,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Senha', type: 'password' },
       },
       authorize: async (credentials) => {
-        if (credentials?.email !== 'teste@email.com' || credentials?.password !== '123456') {
-          return null;
-        }
-
-        const userData = {
-          id: '1',
-          name: 'John Doe',
+        const data = await authService.login({
           email: credentials?.email as string,
-        };
-
-        return userData;
+          password: credentials?.password as string,
+        });
+        if (data.token) {
+          return { id: '1', token: data.token };
+        }
+        return null;
       },
     }),
   ],
@@ -34,13 +32,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token.accessToken = user.token as string;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id as string;
+        session.user.token = token.accessToken;
       }
       return session;
     },
