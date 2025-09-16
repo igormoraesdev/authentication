@@ -14,7 +14,8 @@ export default async function DashboardPage() {
     },
     cache: 'no-store',
   });
-  const user = await res.json();
 
-  return <Dashboard user={user as CustomUser} />;
+  const { user } = await res.json();
+
+  return <Dashboard user={user} />;
 }

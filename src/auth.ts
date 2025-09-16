@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { authService } from './lib/service';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   cookies: {
     sessionToken: {
       options: {

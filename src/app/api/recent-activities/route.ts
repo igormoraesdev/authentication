@@ -1,8 +1,7 @@
-import { withAuth } from '@/lib/auth';
 import { logger } from '@/lib/logger';
 import { NextResponse } from 'next/server';
 
-export const GET = withAuth(async () => {
+export const GET = async () => {
   try {
     return NextResponse.json([
       { id: 1, action: 'Fez login' },
@@ -12,4 +11,4 @@ export const GET = withAuth(async () => {
   } catch (error) {
     logger.log('Error getting recent activities', error);
   }
-});
+};
