@@ -2,7 +2,7 @@ import { logger } from '@/lib/logger';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-const secret = process.env.NEXTAUTH_SECRET || 'segredo_supersecreto';
+const secret = process.env.NEXTAUTH_SECRET;
 
 type RouteHandler = (_req: NextRequest) => Promise<NextResponse | void>;
 
