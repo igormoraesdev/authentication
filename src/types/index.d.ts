@@ -6,6 +6,7 @@ declare global {
     id: string;
     name: string;
     email: string;
+    memberSince?: string;
   }
 
   export interface JwtPayload {
@@ -32,6 +33,7 @@ declare global {
 declare module 'next-auth' {
   interface Session {
     user: User & CustomUser & AdapterUser & { token: string };
+    accessToken: string;
   }
 
   interface User extends DefaultUser {
