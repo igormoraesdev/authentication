@@ -10,9 +10,9 @@ export class JwtService {
       .sign(this.secret);
   }
 
-  async decode(token: string): Promise<JWTPayload> {
+  async decode<T = unknown>(token: string): Promise<T> {
     const { payload } = await jwtVerify(token, this.secret);
-    return payload;
+    return payload as T;
   }
 }
 
