@@ -1,7 +1,3 @@
-import { FrontendError } from './front-error';
-import { ServerError } from './server-error';
-
 export interface ILogger {
-  server(_message: string): ServerError;
-  frontend(_message: string): FrontendError;
+  log(_message: string, _error: Error): void;
 }

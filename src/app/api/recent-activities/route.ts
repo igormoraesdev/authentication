@@ -9,7 +9,7 @@ export const GET = withAuth(async () => {
       { id: 2, action: 'Atualizou perfil' },
       { id: 3, action: 'Criou um novo post' },
     ]);
-  } catch {
-    throw logger.server('GET: Recent Activities: Error');
+  } catch (error) {
+    logger.log('Error getting recent activities', error);
   }
 });

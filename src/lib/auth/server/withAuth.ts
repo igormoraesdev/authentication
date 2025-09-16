@@ -12,12 +12,13 @@ export function withAuth(handler: RouteHandler) {
       const token = await getToken({ req, secret });
 
       if (!token) {
+        logger.log('Error withAuth', token);
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
 
       return handler(req);
-    } catch {
-      throw logger.server('withAuth: Error');
+    } catch (error) {
+      logger.log('Error withAuth', error);
     }
   };
 }

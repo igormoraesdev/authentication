@@ -1,23 +1,23 @@
-import { FrontendError, ILogger, ServerError } from './';
+import * as Sentry from '@sentry/nextjs';
+import { ILogger } from './';
 
 class Logger implements ILogger {
-  private static instance: ILogger | null = null;
+  private static instance: Logger | null = null;
 
-  constructor() {
-    this.server = this.server.bind(this);
-    this.frontend = this.frontend.bind(this);
-  }
+  constructor(private readonly _sentry: typeof Sentry) {}
 
-  public server(message: string) {
-    return new ServerError(message);
-  }
-  public frontend(message: string) {
-    return new FrontendError(message);
+  log(message: string, error: Error | unknown) {
+    this._sentry.captureMessage(message, {
+      level: 'error',
+      extra: {
+        error,
+      },
+    });
   }
 
   static getInstance(): Logger {
     if (!Logger.instance) {
-      Logger.instance = new Logger();
+      Logger.instance = new Logger(Sentry);
     }
     return Logger.instance;
   }

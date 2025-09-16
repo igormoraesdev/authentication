@@ -11,12 +11,12 @@ export const GET = withAuth(async (req: NextRequest) => {
     const token = await getToken({ req, secret });
 
     if (!token) {
-      logger.server('GET: User Profile: Unauthorized');
+      logger.log('Error getting user profile', token);
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const user = await jwtService.decode(token.accessToken);
     return NextResponse.json(user);
-  } catch {
-    logger.server('GET: User Profile: Unauthorized');
+  } catch (error) {
+    logger.log('Error getting user profile', error);
   }
 });

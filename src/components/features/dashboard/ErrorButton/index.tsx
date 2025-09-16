@@ -1,5 +1,4 @@
 'use client';
-import { logger } from '@/lib/logger';
 
 export const ErrorButton = () => (
   <>
@@ -13,7 +12,7 @@ export const ErrorButton = () => (
     </button>
     <button
       onClick={() => {
-        throw logger.frontend('Error client side');
+        throw new Error('Error client side');
       }}
       className="bg-indigo-500 text-white px-4 py-2 rounded-md cursor-pointer"
     >

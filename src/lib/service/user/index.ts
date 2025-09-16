@@ -13,16 +13,16 @@ export class UserService {
         headers: config?.headers,
       });
       return response.data;
-    } catch {
-      throw logger.server('Error getting user profile');
+    } catch (error) {
+      logger.log('Error getting user profile', error);
     }
   }
   async getRecentActivites(): Promise<Activites[] | undefined> {
     try {
       const response = await this.client.get<Activites[]>(`${this.baseEndpoint}/recent-activities`);
       return response.data;
-    } catch {
-      throw logger.frontend('Error getting recent activities');
+    } catch (error) {
+      logger.log('Error getting recent activities', error);
     }
   }
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import { logger } from '@/lib/logger';
 import { authService } from '@/lib/service';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
@@ -15,7 +14,7 @@ export default function Signin() {
 
     try {
       const authResponse = await authService.login({ email, password });
-      if (authResponse.token) {
+      if (authResponse?.token) {
         await signIn('credentials', {
           email,
           password,
@@ -24,7 +23,7 @@ export default function Signin() {
         });
       }
     } catch {
-      throw logger.frontend('Error Authenticating');
+      throw new Error('Error Authenticating');
     }
   };
 

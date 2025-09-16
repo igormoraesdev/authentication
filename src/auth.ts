@@ -16,7 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: credentials?.email as string,
           password: credentials?.password as string,
         });
-        if (data.token) {
+        if (data?.token) {
           return { id: '1', token: data.token };
         }
         return null;
