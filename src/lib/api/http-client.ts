@@ -1,7 +1,5 @@
-import { auth } from '@/auth';
 import type { HttpError, HttpRequestConfig, HttpResponse, IHttpClient } from '@/lib/api/types';
 import axios, { type AxiosError, type AxiosInstance, type AxiosResponse } from 'axios';
-import { getSession } from 'next-auth/react';
 
 export class AxiosHttpClient implements IHttpClient {
   private readonly axiosInstance: AxiosInstance;
@@ -15,28 +13,6 @@ export class AxiosHttpClient implements IHttpClient {
       },
       withCredentials: true,
     });
-    this.setInterceptors();
-  }
-
-  private setInterceptors() {
-    this.axiosInstance.interceptors.request.use(
-      async (config) => {
-        const isServer = typeof window === 'undefined';
-        const session = isServer ? await auth() : await getSession();
-
-        if (session?.user?.token) {
-          config.headers.Authorization = `Bearer ${session.user.token}`;
-        }
-
-        return config;
-      },
-      (error) => Promise.reject(error),
-    );
-
-    this.axiosInstance.interceptors.response.use(
-      (response) => response,
-      (error) => Promise.reject(error),
-    );
   }
 
   private transformError(error: AxiosError): HttpError {
