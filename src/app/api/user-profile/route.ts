@@ -11,7 +11,7 @@ export const GET = withAuth(async (req: NextRequest) => {
     const token = await getToken({ req, secret });
 
     if (!token) {
-      logger.log('Error getting user profile', token);
+      logger.log('Error getting user profile', new Error('Token não encontrado!'));
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const user = await jwtService.decode(token.accessToken);
