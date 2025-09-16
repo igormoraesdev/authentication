@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import { decode, encode } from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
 import { authService } from './lib/service';
 
@@ -55,6 +56,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.token = token.accessToken;
       }
       return session;
+    },
+  },
+  jwt: {
+    encode: async ({ token }) => {
+      const encoded = await encode({
+        token,
+        secret: process.env.NEXTAUTH_SECRET as string,
+        salt: 'salt',
+      });
+      return encoded;
+    },
+    decode: async ({ token }) => {
+      const decoded = await decode({
+        token,
+        secret: process.env.NEXTAUTH_SECRET as string,
+        salt: 'salt',
+      });
+      return decoded;
     },
   },
 });
