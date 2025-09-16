@@ -10,6 +10,6 @@ export const GET = withAuth(async () => {
       { id: 3, action: 'Criou um novo post' },
     ]);
   } catch {
-    logger.server('GET: Recent Activities: Error');
+    throw logger.server('GET: Recent Activities: Error');
   }
 });
