@@ -17,9 +17,9 @@ export default withSentryConfig(nextConfig, {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
-  org: 'test-9af',
+  org: 'test2-ei',
 
-  project: 'authentication',
+  project: 'javascript-nextjs',
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
